@@ -22,12 +22,12 @@ public class AdoptionAppConfig {
         profile = bundle.getString("backend.profile");
     }
 
-    @Bean
+//    @Bean
     public PersonDAO getPersonDAO() {
         return DAOFactory.getPersonDAO();
     }
 
-    @Bean(name = "personService")
+//    @Bean(name = "personService")
     public PersonService getService() {
         var service = new PersonService();
         service.setPersonDAO(getPersonDAO());

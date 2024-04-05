@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
-@Profile("dev")
+
 @Repository
+@Profile("dev")
 public class InMemoryDAO implements PersonDAO {
     private Map<Integer, Person> persons = new HashMap<>();
     private int nextId = 1;
