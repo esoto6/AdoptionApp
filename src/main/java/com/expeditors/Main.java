@@ -24,9 +24,9 @@ public class Main {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev");
-        context.register(AdoptionAppConfig.class);
 //        context.register(AdoptionAppConfig.class);
-//        context.scan("com.expeditors");
+//        context.register(AdoptionAppConfig.class);
+        context.scan("com.expeditors");
         context.refresh();
 
         PersonService personService = context.getBean("personService", PersonService.class);
