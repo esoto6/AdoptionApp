@@ -18,7 +18,8 @@ public class PersonService {
 
     @Autowired
     public void setPersonDAO(PersonDAO personDAO) {
-        this.personDAO = personDAO; }
+        this.personDAO = personDAO;
+    }
 
 
     public Person insertPerson(Person person){

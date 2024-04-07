@@ -22,12 +22,12 @@ public class Main {
 
     public void run() {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AdoptionAppConfig.class);
-        context.register(AdoptionAppConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev");
 //        context.register(AdoptionAppConfig.class);
-//        context.scan("com.expeditors");
-//        context.refresh();
+//        context.register(AdoptionAppConfig.class);
+        context.scan("com.expeditors");
+        context.refresh();
 
         PersonService personService = context.getBean("personService", PersonService.class);
 
