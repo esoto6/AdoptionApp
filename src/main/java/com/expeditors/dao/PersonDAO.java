@@ -1,24 +1,23 @@
 package com.expeditors.dao;
 
-import com.expeditors.adopter.Person;
-import org.springframework.stereotype.Repository;
+import com.expeditors.adopter.Adopter;
 
 import java.util.Collection;
 import java.util.List;
 public interface PersonDAO {
 
-    Person insert(Person person);
+    Adopter insert(Adopter person);
 
-    boolean update(Person person);
+    boolean update(Adopter person);
 
     boolean delete(int id);
 
-    Person findByID(int id);
+    Adopter findByID(int id);
 
     boolean findByName(String name);
 
-    Collection<Person> naturalSort();
+    Collection<Adopter> naturalSort();
 
-    List<Person> findAll();
+    List<Adopter> findAll();
 
 }

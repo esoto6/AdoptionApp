@@ -1,6 +1,6 @@
 package com.expeditors.dao;
 
-import com.expeditors.adopter.Person;
+import com.expeditors.adopter.Adopter;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 @Repository
 @Profile("dev")
 public class InMemoryDAO implements PersonDAO {
-    private Map<Integer, Person> persons = new HashMap<>();
+    private Map<Integer, Adopter> persons = new HashMap<>();
     private int nextId = 1;
 
     @Override
-    public Person insert(Person person) {
+    public Adopter insert(Adopter person) {
         int id = nextId++;
         person.setId(id);
         //person.setName(STR."InMem: \{person.getName()}");
@@ -23,7 +23,7 @@ public class InMemoryDAO implements PersonDAO {
     }
 
     @Override
-    public boolean update(Person person) {
+    public boolean update(Adopter person) {
         return persons.replace(person.getId(), person) != null;
     }
 
@@ -33,7 +33,7 @@ public class InMemoryDAO implements PersonDAO {
     }
 
     @Override
-    public Person findByID(int id) {
+    public Adopter findByID(int id) {
         return persons.get(id);
     }
 
@@ -43,13 +43,13 @@ public class InMemoryDAO implements PersonDAO {
     }
 
     @Override
-    public Collection<Person> naturalSort() {
+    public Collection<Adopter> naturalSort() {
         return persons.values().stream().sorted().collect(Collectors.toList());
     }
 
 
     @Override
-    public List<Person> findAll() {
+    public List<Adopter> findAll() {
         return new ArrayList<>(persons.values());
     }
 }

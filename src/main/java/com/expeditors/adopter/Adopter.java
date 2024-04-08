@@ -4,7 +4,7 @@ import com.expeditors.animal.Animal;
 
 import java.util.List;
 
-public interface Person {
+public interface Adopter {
     int getId();
 
     void setId(int id);

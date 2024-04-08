@@ -5,7 +5,7 @@ import com.expeditors.animal.Animal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractPerson implements Person {
+public class AdopterImpl implements Adopter {
     private int id;
     private String name;
     private String phoneNumber;
@@ -13,9 +13,7 @@ public class AbstractPerson implements Person {
     private boolean isOver18;
     private List<Animal> adoptedAnimals = new ArrayList<>();
 
-
-
-    public AbstractPerson(int id, String name, String phoneNumber, String email, Boolean isOver18) {
+    public AdopterImpl(int id, String name, String phoneNumber, String email, Boolean isOver18) {
         this.id = id;
         setName(name);
         setPhoneNumber(phoneNumber);
@@ -23,11 +21,11 @@ public class AbstractPerson implements Person {
         this.isOver18 = isOver18;
     }
 
-    public AbstractPerson(String name, String phoneNumber, String email) {
+    public AdopterImpl(String name, String phoneNumber, String email) {
         this(name, phoneNumber, email, false);
     }
 
-    public AbstractPerson(String name, String phoneNumber, String email, Boolean isOver18){
+    public AdopterImpl(String name, String phoneNumber, String email, Boolean isOver18){
         this(0, name, phoneNumber,email,isOver18);
 
     }
@@ -71,7 +69,7 @@ public class AbstractPerson implements Person {
             throw new IllegalArgumentException("Argument: phoneNumber can't be null");
         } else if (phoneNumber.trim().isEmpty()){
             throw new IllegalArgumentException("Argument: phoneNumber can't be empty or blank string");
-        } else if (!phoneNumber.matches("([0-9]+(-[0-9]+)+)")) {
+        } else if (!phoneNumber.matches("^\\d{3}-\\d{3}-\\d{4}$")) {
             throw new IllegalArgumentException(STR."Bad phone number value: \{phoneNumber}. Expecting (xxx-xxx-xxxx)");
         }
         this.phoneNumber = phoneNumber;
@@ -99,7 +97,7 @@ public class AbstractPerson implements Person {
 
     @Override
     public List<Animal> getAdoptedAnimals() {
-        return adoptedAnimals;
+        return this.adoptedAnimals;
     }
 
     @Override

@@ -1,28 +1,22 @@
 package com.expeditors.service;
 
-import com.expeditors.adopter.Person;
+import com.expeditors.adopter.Adopter;
 import com.expeditors.dao.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service("personService")
 @Scope(value = BeanDefinition.SCOPE_SINGLETON)
-public class PersonService {
-
-    private PersonDAO personDAO;
+public class AdopterService {
 
     @Autowired
-    public void setPersonDAO(PersonDAO personDAO) {
-        this.personDAO = personDAO;
-    }
+    private PersonDAO personDAO;
 
-
-    public Person insertPerson(Person person){
+    public Adopter insertPerson(Adopter person){
         return personDAO.insert(person);
     }
 
@@ -32,12 +26,12 @@ public class PersonService {
     }
 
 
-    public boolean updatePerson(Person person) {
+    public boolean updatePerson(Adopter person) {
         return personDAO.update(person);
     }
 
 
-    public Person getPerson(int id){
+    public Adopter getPerson(int id){
         return personDAO.findByID(id);
     }
 
@@ -47,9 +41,7 @@ public class PersonService {
     }
 
 
-    public Collection<Person> sortNaturalOrder() {return personDAO.naturalSort(); }
-
-    public List<Person> getAllPersons(){
+    public List<Adopter> getAllPersons(){
         return personDAO.findAll();
     }
 
