@@ -14,9 +14,6 @@ public interface PersonDAO {
 
     Adopter findByID(int id);
 
-    boolean findByName(String name);
-
-    Collection<Adopter> naturalSort();
 
     List<Adopter> findAll();
 

@@ -15,7 +15,8 @@ public class AdopterImpl implements Adopter {
     private boolean isOver18;
     private List<Animal> adoptedAnimals = new ArrayList<>();
 
-    public AdopterImpl(int id, String name, String phoneNumber, String email, Boolean isOver18) {
+
+    public AdopterImpl(Integer id, String name, String phoneNumber, String email, Boolean isOver18) {
         this.id = id;
         setName(name);
         setPhoneNumber(phoneNumber);
@@ -23,14 +24,15 @@ public class AdopterImpl implements Adopter {
         this.isOver18 = isOver18;
     }
 
+    public AdopterImpl(String name, String phoneNumber, String email, Boolean isOver18){
+        this(0, name, phoneNumber,email,isOver18);
+    }
+
     public AdopterImpl(String name, String phoneNumber, String email) {
         this(name, phoneNumber, email, false);
     }
 
-    public AdopterImpl(String name, String phoneNumber, String email, Boolean isOver18){
-        this(0, name, phoneNumber,email,isOver18);
 
-    }
     @Override
     public int getId() {
         return id;

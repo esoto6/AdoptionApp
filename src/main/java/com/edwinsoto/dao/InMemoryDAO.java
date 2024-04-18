@@ -37,15 +37,7 @@ public class InMemoryDAO implements PersonDAO {
         return persons.get(id);
     }
 
-    @Override
-    public boolean findByName(String name) {
-        return persons.values().stream().anyMatch(v -> v.getName().equalsIgnoreCase(name));
-    }
 
-    @Override
-    public Collection<Adopter> naturalSort() {
-        return persons.values().stream().sorted().collect(Collectors.toList());
-    }
 
 
     @Override

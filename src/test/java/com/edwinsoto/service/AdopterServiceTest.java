@@ -2,7 +2,7 @@ package com.edwinsoto.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.edwinsoto.service.AdopterService;
+import com.edwinsoto.adopter.AdopterService;
 //import com.edwins.AdoptionAppConfig;
 import com.edwinsoto.adopter.AdopterImpl;
 import com.edwinsoto.adopter.Adopter;
@@ -13,8 +13,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 //@ExtendWith(SpringExtension.class)
 //@ContextConfiguration(classes = {AdoptionAppConfig.class})
@@ -70,7 +68,7 @@ class AdopterServiceTest {
         Adopter newPerson = adopterService.insertPerson(person1);
         assertNotNull(newPerson);
 
-        Adopter person = adopterService.getPerson(1);
+        Adopter person = adopterService.getPersonById(1);
 
         assertEquals("Edwin Soto", person.getName());
     }

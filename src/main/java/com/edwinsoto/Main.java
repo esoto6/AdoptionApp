@@ -6,7 +6,7 @@ import com.edwinsoto.animal.Animal;
 import com.edwinsoto.animal.Cat;
 import com.edwinsoto.animal.Dog;
 import com.edwinsoto.animal.Turtle;
-import com.edwinsoto.service.AdopterService;
+import com.edwinsoto.adopter.AdopterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,11 +36,11 @@ public class Main {
         public void run(String... args) throws Exception {
             System.out.println("MyRunner has been called");
 
-            Adopter person1 = new AdopterImpl("Edwin Soto", "843-123-1111", "edwin.soto@email.com", true);
-            Adopter person2 = new AdopterImpl("Mackenzie Soto", "843-123-1111", "mackenzie.soto@email.com", true);
-            Adopter person3 = new AdopterImpl("Liam Soto", "123-123-3456", "liam.soto@email.com");
-            Adopter person4 = new AdopterImpl("Leila Soto", "123-123-3456", "leila.soto@email.com");
-            Adopter person5 = new AdopterImpl("Levi Soto", "123-123-3456", "levi.soto@email.com");
+            Adopter person1 = new AdopterImpl("Edwin Soto", "111-111-1111", "edwin.soto@email.com", true);
+            Adopter person2 = new AdopterImpl("Mackenzie Soto", "222-222-2222", "mackenzie.soto@email.com", true);
+            Adopter person3 = new AdopterImpl("Liam Soto", "333-333-3333", "liam.soto@email.com");
+            Adopter person4 = new AdopterImpl("Leila Soto", "444-444-4444", "leila.soto@email.com");
+            Adopter person5 = new AdopterImpl("Levi Soto", "555-555-5555", "levi.soto@email.com");
 
             //Add Persons to service
             adopterService.insertPerson(person1);
@@ -67,49 +67,49 @@ public class Main {
             Animal dog2 = new Dog(2, "Spot", LocalDate.of(2023,12,24),  "German Malinois");
             Animal turtle = new Turtle(3, "Slimy", LocalDate.of(2022, 3, 23),  "Yellow Belly Slider");
 
-            // Animals make greetings
-            System.out.println();
-            cat.animalGreeting();
-            cat2.animalGreeting();
-            dog.animalGreeting();
-            dog2.animalGreeting();
-            turtle.animalGreeting();
-
-            // Set Adopted Animals
-            System.out.println(newline);
-            person1.setAdoptedAnimals(dog);
-            person2.setAdoptedAnimals(cat);
-            person2.setAdoptedAnimals(turtle);
-
-            // Get Owners of Adopted Animals
-            System.out.println(newline);
-            System.out.println(STR."\{dog.getAnimalName()}'s owner is \{dog.getOwner().getName()} adopted on \{dog.getAdoptedDate()}.");
-            System.out.println(STR."\{cat.getAnimalName()}'s owner is \{cat.getOwner().getName()} adopted on \\{dog.getAdoptedDate()}.");
-            System.out.println(STR."\{turtle.getAnimalName()}'s owner is \{turtle.getOwner().getName()} adopted on \\{dog.getAdoptedDate()}.");
-
-            System.out.println(newline);
-            System.out.println("Adopted Animals for Person2");
-            List<Animal> adoptedAnimals = person2.getAdoptedAnimals();
-            for (Animal animal: adoptedAnimals){
-                System.out.println(STR."Person 2 has adopted: \{animal.toString()}");
-            }
-
-            // Get All Persons from Service
-            System.out.println(newline);
-            System.out.println("Post Adoptions");
-            persons = adopterService.getAllPersons();
-            System.out.println(STR."Persons Size: \{persons.size()}");
-            persons.forEach(System.out::println);
-
-            // Find Adopter By Name
-            System.out.println(newline);
-            String nameToSearch = "Edwin Soto";
-            boolean isPerson = adopterService.getPersonName(nameToSearch);
-            System.out.println(STR."Person: \{nameToSearch} is \{isPerson}");
-
-            String nameToSearch2 = "Gracie Soto";
-            boolean isPerson2 = adopterService.getPersonName(nameToSearch2);
-            System.out.println(STR."Person: \{nameToSearch2} is \{isPerson2}");
+//            // Animals make greetings
+//            System.out.println();
+//            cat.animalGreeting();
+//            cat2.animalGreeting();
+//            dog.animalGreeting();
+//            dog2.animalGreeting();
+//            turtle.animalGreeting();
+//
+//            // Set Adopted Animals
+//            System.out.println(newline);
+//            person1.setAdoptedAnimals(dog);
+//            person2.setAdoptedAnimals(cat);
+//            person2.setAdoptedAnimals(turtle);
+//
+//            // Get Owners of Adopted Animals
+//            System.out.println(newline);
+//            System.out.println(STR."\{dog.getAnimalName()}'s owner is \{dog.getOwner().getName()} adopted on \{dog.getAdoptedDate()}.");
+//            System.out.println(STR."\{cat.getAnimalName()}'s owner is \{cat.getOwner().getName()} adopted on \\{dog.getAdoptedDate()}.");
+//            System.out.println(STR."\{turtle.getAnimalName()}'s owner is \{turtle.getOwner().getName()} adopted on \\{dog.getAdoptedDate()}.");
+//
+//            System.out.println(newline);
+//            System.out.println("Adopted Animals for Person2");
+//            List<Animal> adoptedAnimals = person2.getAdoptedAnimals();
+//            for (Animal animal: adoptedAnimals){
+//                System.out.println(STR."Person 2 has adopted: \{animal.toString()}");
+//            }
+//
+//            // Get All Persons from Service
+//            System.out.println(newline);
+//            System.out.println("Post Adoptions");
+//            persons = adopterService.getAllPersons();
+//            System.out.println(STR."Persons Size: \{persons.size()}");
+//            persons.forEach(System.out::println);
+//
+//            // Find Adopter By Name
+//            System.out.println(newline);
+//            String nameToSearch = "Edwin Soto";
+//            boolean isPerson = adopterService.getPersonName(nameToSearch);
+//            System.out.println(STR."Person: \{nameToSearch} is \{isPerson}");
+//
+//            String nameToSearch2 = "Gracie Soto";
+//            boolean isPerson2 = adopterService.getPersonName(nameToSearch2);
+//            System.out.println(STR."Person: \{nameToSearch2} is \{isPerson2}");
         }
     }
 }
