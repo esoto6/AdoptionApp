@@ -1,67 +1,61 @@
 package com.edwinsoto.adopter;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/adopter")
+@RequestMapping("/api/v1/adopter")
+@CrossOrigin()
 public class AdopterController {
 
-    private AdopterService adopterService;
+    private final AdopterService service;
 
     @Autowired
     public AdopterController(AdopterService adopterService) {
-        this.adopterService = adopterService;
+        this.service = adopterService;
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllAdopters() {
-        List<Adopter> adoptersList = adopterService.getAllPersons();
-        if (adoptersList.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(adoptersList);
+    public List<Adopter> getAll() {
+        return service.getAllAdopters();
     }
 
     @GetMapping("/id={id}")
-    public ResponseEntity<?> getAdopterById(@PathVariable int id) {
-
-        Adopter person = adopterService.getPersonById(id);
-        if (person == null) {
-            return ResponseEntity.notFound().build();
-
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        Optional<Adopter> person = service.getAdopterById(id);
+        if (person.isPresent()){
+            return ResponseEntity.ok().body(person.get());
         }
-        return ResponseEntity.ok(person);
+        return ResponseEntity.notFound().build();
     }
 
-///   TODO: Finish this
-    @PostMapping
-    public ResponseEntity<?> addAdopter(@Validated @RequestBody Adopter adopter) {
-        return ResponseEntity.ok().build();
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    public void addPerson(@Valid @RequestBody Adopter adopter) {
+        service.insertAdopter(adopter);
     }
 
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/id={id}")
+    public void update(@Valid @RequestBody Adopter adopter, @PathVariable Integer id) {
+        if(!service.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, STR."Adopter \{id} not found");
+        }
+        service.insertAdopter(adopter);
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/id={id}")
-    public ResponseEntity<?> deleteAdopter(@PathVariable int id) {
-        boolean deleted = adopterService.deletePerson(id);
-        if (deleted) {
-            return ResponseEntity.ok().build();
+    public void deleteById(@PathVariable int id) {
+        if (!service.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, STR."Adopter \{id} not found");
         }
-        return ResponseEntity.notFound().build();
+        service.deleteAdopterById(id);
     }
-
-//    TODO: Finish this
-    @PutMapping
-    public ResponseEntity<?> updateAdopter(@RequestBody Adopter person) {
-        boolean updated = adopterService.updatePerson(person);
-        if (updated) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
 }

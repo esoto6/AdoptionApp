@@ -1,43 +1,45 @@
 package com.edwinsoto.adopter;
 
-import com.edwinsoto.dao.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdopterService {
 
-    private PersonDAO personDAO;
+    private final AdopterCollectionRepository repository;
 
     @Autowired
-    public AdopterService(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    public AdopterService(AdopterCollectionRepository repository) {
+        this.repository = repository;
     }
 
-    public Adopter insertPerson(Adopter person){
-        return personDAO.insert(person);
+    public List<Adopter> getAllAdopters(){
+        return repository.findAll();
     }
 
-    public boolean updatePerson(Adopter person) {
-        return personDAO.update(person);
+    public Optional<Adopter> getAdopterById(int id) {
+        boolean isValidId = repository.existsById(id);
+        if (isValidId) {
+            return repository.findById(id);
+        }
+        return Optional.empty();
     }
 
-    public boolean deletePerson(int id){
-        return personDAO.delete(id);
+    public void insertAdopter(Adopter adopter) {
+        repository.insertAdopter(adopter);
     }
 
-    public Adopter getPersonById(int id){
-        return personDAO.findByID(id);
+    public boolean existsById(Integer id) {
+        return repository.existsById(id);
     }
 
-
-    public List<Adopter> getAllPersons(){
-        return personDAO.findAll();
+    public void deleteAdopterById(int id) {
+        repository.delete(id);
     }
-
 
 }
-
 
