@@ -1,31 +1,21 @@
 package com.edwinsoto.adopter;
 
 import com.edwinsoto.animal.Animal;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-public interface Adopter {
-    int getId();
+public record Adopter(
+        Integer id,
+        @NotBlank String name,
+        @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{4}$") String phoneNumber,
+        @Email String email,
+        boolean isOver18,
+        LocalDateTime dateCreated,
+        LocalDateTime dateModified,
+        List<Animal> adopterAnimals
 
-    void setId(int id);
-
-    String getName();
-
-    void setName(String name);
-
-    String getPhoneNumber();
-
-    void setPhoneNumber(String phoneNumber);
-
-    String getEmail();
-
-    void setEmail(String email);
-
-    List<Animal> getAdoptedAnimals();
-
-    void setAdoptedAnimals(Animal animal);
-
-
-    @Override
-    String toString();
-}
+){}

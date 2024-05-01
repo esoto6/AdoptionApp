@@ -1,6 +1,7 @@
 package com.edwinsoto.animal;
 
-import com.edwinsoto.adopter.AdopterImpl;
+
+import com.edwinsoto.adopter.Adopter;
 
 import java.time.LocalDate;
 
@@ -11,11 +12,11 @@ public interface Animal {
 
     void animalGreeting();
 
-    AdopterImpl getOwner();
+    Adopter getOwner();
 
     @Override
     String toString();
 
-    void setOwner(AdopterImpl owner);
+    void setOwner(Adopter owner);
 
 }
