@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("prod")
+@Profile({"prod", "test-containers"})
 public class AdopterPostgresDAO extends AbstractDAO implements DAO<Adopter> {
 
 

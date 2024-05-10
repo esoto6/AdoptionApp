@@ -1,9 +1,12 @@
 services:
+
   db:
     image: postgres
     environment:
-      POSTGRES_USER: larku
-      POSTGRES_PASSWORD: larku
+      POSTGRES_USER: ${PG_USERNAME}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: adoption
     ports:
       - 5433:5432
+    env_file:
+      - "./.env"

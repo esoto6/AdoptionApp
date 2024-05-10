@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("dev")
+@Profile("inmem")
 public class AdopterInMemDAO implements DAO<Adopter>{
 
     private final List<Adopter> adopters = new ArrayList<>();

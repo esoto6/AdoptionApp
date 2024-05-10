@@ -1,3 +1,13 @@
+
+
+DROP ROLE IF EXISTS larku;
+CREATE USER larku password 'larku' CREATEDB CREATEROLE;
+
+ALTER ROLE larku WITH LOGIN;
+ALTER ROLE larku INHERIT ;
+
+ALTER DATABASE adoption OWNER TO larku;
+
 SET ROLE larku;
 
 DROP TABLE IF EXISTS ADOPTERS;
@@ -29,18 +39,14 @@ CREATE TABLE ANIMALS
 CREATE UNIQUE INDEX idx_adopter_id ON ADOPTERS (id ASC);
 CREATE UNIQUE INDEX idx_animal_id ON ANIMALS (id ASC);
 
-
-
+-- Insert Adopters Data
 INSERT INTO ADOPTERS(id, name, phoneNumber, email, is18, dateCreated, dateModified) VALUES (1, 'Edwin Soto', '111-111-1111', 'edwin.soto@email.com', true, now(), null);
 INSERT INTO ADOPTERS(id, name, phoneNumber, email, is18, dateCreated, dateModified) VALUES (2, 'Spouse Soto', '222-222-2222', 'spouse.soto@email.com', true, now(), null);
 INSERT INTO ADOPTERS(id, name, phoneNumber, email, is18, dateCreated, dateModified) VALUES (3, 'Kido One Soto', '333-333-3333', 'kido1.soto@email.com', false, now(), null);
 INSERT INTO ADOPTERS(id, name, phoneNumber, email, is18, dateCreated, dateModified) VALUES (4, 'Kido Two Soto', '444-444-4444', 'kido2.soto@email.com', false, now(), null);
 INSERT INTO ADOPTERS(id, name, phoneNumber, email, is18, dateCreated, dateModified) VALUES (5, 'Kido Three Soto', '555-555-5555', 'kido3.soto@email.com', false, now(), null);
 
-
-
-
-
+-- Insert Animals Data
 INSERT INTO ANIMALS(id, name, type, dob, breed, adopter, adoptedDate) VALUES (1,'Fred', 'CAT', '2024-01-23', 'Siamese', null, null);
 INSERT INTO ANIMALS(id, name, type, dob, breed, adopter, adoptedDate) VALUES  (2, 'CAT', 'Fido', '2023-07-29', 'persian', null, null);
 INSERT INTO ANIMALS(id, name, type, dob, breed, adopter, adoptedDate) VALUES (3, 'DOG', 'Gracie', '2022-01-23', 'Terrier Mix', null, null);
