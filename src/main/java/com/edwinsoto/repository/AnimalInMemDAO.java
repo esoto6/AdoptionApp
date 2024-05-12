@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("inmem")
-public class AnimalInMemDAO  implements DAO<Animal>{
+@Profile("dev")
+public class AnimalInMemDAO implements DAO<Animal> {
 
     private final List<Animal> animals = new ArrayList<>();
     private int nextId = 1;
 
-    public AnimalInMemDAO() {}
+    public AnimalInMemDAO() {
+    }
 
 
     @Override
@@ -76,7 +77,7 @@ public class AnimalInMemDAO  implements DAO<Animal>{
                 .id(nextId++)
                 .name("Fred")
                 .type("CAT")
-                .dob(LocalDate.of(2024,1,23))
+                .dob(LocalDate.of(2024, 1, 23))
                 .breed("Persian")
                 .build();
 
@@ -84,7 +85,7 @@ public class AnimalInMemDAO  implements DAO<Animal>{
                 .id(nextId++)
                 .name("Spot")
                 .type("DOG")
-                .dob(LocalDate.of(2023, 12,24))
+                .dob(LocalDate.of(2023, 12, 24))
                 .breed("Labrador")
                 .build();
 
@@ -92,7 +93,7 @@ public class AnimalInMemDAO  implements DAO<Animal>{
                 .id(nextId++)
                 .name("Slimy")
                 .type("TURTLE")
-                .dob(LocalDate.of(2022,03,23))
+                .dob(LocalDate.of(2022, 03, 23))
                 .breed("Yellow Belly Slider")
                 .build();
 

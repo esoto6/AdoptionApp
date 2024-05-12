@@ -52,16 +52,16 @@ public class AdopterController {
     @PutMapping("/id={id}")
     public ResponseEntity<Boolean> updateAdopter(@RequestBody @Valid Adopter adopter, @PathVariable("id") int id) {
         Optional<Adopter> foundAdopter = adopterService.getAdopterById(id);
-        if (foundAdopter.isPresent()){
+        if (foundAdopter.isPresent()) {
             Adopter upAdopter = foundAdopter.get();
 
-            if (adopter.getName() != null){
+            if (adopter.getName() != null) {
                 upAdopter.setName(adopter.getName());
             }
-            if(adopter.getPhoneNumber() != null){
+            if (adopter.getPhoneNumber() != null) {
                 upAdopter.setPhoneNumber(adopter.getPhoneNumber());
             }
-            if(adopter.getEmail() != null){
+            if (adopter.getEmail() != null) {
                 upAdopter.setEmail(adopter.getEmail());
             }
             boolean isUpdated = adopterService.updateAdopter(upAdopter);
@@ -74,7 +74,7 @@ public class AdopterController {
     @DeleteMapping("/id={id}")
     public ResponseEntity<Integer> deleteAdopter(@PathVariable("id") int id) {
         Optional<Adopter> foundAdopter = adopterService.getAdopterById(id);
-        if (foundAdopter.isPresent()){
+        if (foundAdopter.isPresent()) {
             int rowsAffected = adopterService.deleteAdopter(id);
             return ResponseEntity.ok().body(rowsAffected);
         }

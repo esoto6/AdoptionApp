@@ -11,14 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("inmem")
-public class AdopterInMemDAO implements DAO<Adopter>{
+@Profile("dev")
+public class AdopterInMemDAO implements DAO<Adopter> {
 
     private final List<Adopter> adopters = new ArrayList<>();
 
     private int nextId = 1;
 
-    public AdopterInMemDAO() {}
+    public AdopterInMemDAO() {
+    }
 
 
     @Override
@@ -60,7 +61,7 @@ public class AdopterInMemDAO implements DAO<Adopter>{
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         // Use the PostConstruct to init the adopters
         Adopter person1 = Adopter.builder()
                 .id(nextId++)

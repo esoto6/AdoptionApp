@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile({"prod", "test-containers"})
+@Profile({"tc", "prod"})
 public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
     
     @Override

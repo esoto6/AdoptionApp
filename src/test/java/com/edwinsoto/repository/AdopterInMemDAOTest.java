@@ -13,8 +13,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ActiveProfiles(profiles="dev")
+@SpringBootTest(classes = AdopterInMemDAO.class)
+@ActiveProfiles(profiles = "dev")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class AdopterInMemDAOTest {
 
@@ -29,19 +29,19 @@ class AdopterInMemDAOTest {
     }
 
     @Test
-    void findByValidID(){
+    void findByValidID() {
         Optional<Adopter> adopter = adopterInMemDAO.findById(1);
         assertEquals(1, adopter.get().getId());
     }
 
     @Test
-    void findByInvalidID(){
+    void findByInvalidID() {
         Optional<Adopter> adopter = adopterInMemDAO.findById(250);
         assertInstanceOf(Optional.class, adopter);
     }
 
     @Test
-    void createAdopter(){
+    void createAdopter() {
         Adopter newAdopter = Adopter.builder()
                 .name("New Name")
                 .email("new.name@email.com")
@@ -58,7 +58,7 @@ class AdopterInMemDAOTest {
     }
 
     @Test
-    void updateAdopter(){
+    void updateAdopter() {
         Adopter updatedAdopter = Adopter.builder()
                 .id(1)
                 .name("New Name")
@@ -77,7 +77,7 @@ class AdopterInMemDAOTest {
     }
 
     @Test
-    void deleteAdopter(){
+    void deleteAdopter() {
         int affectedRecords = adopterInMemDAO.delete(1);
         assertEquals(1, affectedRecords);
     }
