@@ -1,5 +1,4 @@
 services:
-
   db:
     image: postgres
     environment:
@@ -10,3 +9,38 @@ services:
       - 5433:5432
     env_file:
       - "./.env"
+    networks:
+      - adoption-app
+  app:
+    container_name: adoption
+    image: adoption
+    ports:
+      - 8080:8080
+    expose:
+      - "8080"
+    networks:
+      - adoption-app
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    expose:
+      - "9090"
+    networks:
+      - adoption-app
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - adoption-app
+networks:
+  adoption-app:
+    external: false
