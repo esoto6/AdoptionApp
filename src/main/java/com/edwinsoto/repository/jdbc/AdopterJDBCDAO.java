@@ -1,6 +1,7 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import com.edwinsoto.model.Adopter;
+import com.edwinsoto.repository.DAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile({"tc", "prod"})
-public class AdopterPostgresDAO extends AbstractDAO implements DAO<Adopter> {
+@Profile({"tc", "jdbc"})
+public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
 
 
     @Override

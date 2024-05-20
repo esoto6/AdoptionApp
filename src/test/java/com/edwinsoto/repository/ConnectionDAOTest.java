@@ -1,5 +1,6 @@
 package com.edwinsoto.repository;
 
+import com.edwinsoto.repository.jdbc.ConnectionDAO;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles(profiles = "tc")
-class AbstractDAOTest extends AbstractDAO {
+class ConnectionDAOTest extends ConnectionDAO {
 
 
     @Test

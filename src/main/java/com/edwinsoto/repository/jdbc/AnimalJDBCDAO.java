@@ -1,6 +1,7 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import com.edwinsoto.model.Animal;
+import com.edwinsoto.repository.DAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile({"tc", "prod"})
-public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
-    
+@Profile({"tc", "jdbc"})
+public class AnimalJDBCDAO extends ConnectionDAO implements DAO<Animal> {
+
     @Override
     public List<Animal> findAll() {
 

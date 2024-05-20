@@ -1,6 +1,7 @@
 package com.edwinsoto.repository;
 
 import com.edwinsoto.model.Animal;
+import com.edwinsoto.repository.inmem.AnimalInMemDAO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = AnimalInMemDAO.class)
-@ActiveProfiles(profiles = "dev")
+@ActiveProfiles(profiles = "inmem")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class AnimalInMemDAOTest {
 

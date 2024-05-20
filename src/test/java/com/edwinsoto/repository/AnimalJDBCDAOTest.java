@@ -1,6 +1,7 @@
 package com.edwinsoto.repository;
 
 import com.edwinsoto.model.Animal;
+import com.edwinsoto.repository.jdbc.AnimalJDBCDAO;
 import com.edwinsoto.testcontainer.TestContainerConfig;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Testcontainers
-@SpringBootTest(classes = AnimalPostgresDAO.class)
+@SpringBootTest(classes = AnimalJDBCDAO.class)
 @ActiveProfiles("tc")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AnimalPostgresDAOTest extends TestContainerConfig {
+class AnimalJDBCDAOTest extends TestContainerConfig {
 
     @Autowired
-    private AnimalPostgresDAO animalPostgresDAO;
+    private AnimalJDBCDAO animalPostgresDAO;
 
 
     @Test
