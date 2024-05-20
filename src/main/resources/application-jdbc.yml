@@ -4,7 +4,7 @@ spring:
       on-profile: jdbc
     import: optional:file:.env[.properties]
   datasource:
-    url: ${PG_URL}
+    url: ${PG_URL_JDBC}
     username: ${PG_USERNAME}
     password: ${PG_PASSWORD}
     name: adoption

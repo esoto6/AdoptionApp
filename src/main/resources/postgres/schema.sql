@@ -4,7 +4,7 @@ CREATE USER larku password 'larku' CREATEDB CREATEROLE;
 ALTER ROLE larku WITH LOGIN;
 ALTER ROLE larku INHERIT;
 
-ALTER DATABASE adoption OWNER TO larku;
+ALTER DATABASE adoption_jdbc OWNER TO larku;
 
 SET ROLE larku;
 
