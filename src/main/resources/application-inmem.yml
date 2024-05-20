@@ -2,12 +2,5 @@ spring:
   config:
     activate:
       on-profile: inmem
-  datasource:
-    url: ${PG_URL}
-    username: ${PG_USERNAME}
-    password: ${PG_PASSWORD}
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    generate-ddl: false
-    hibernate:
-      ddl-auto: none
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration

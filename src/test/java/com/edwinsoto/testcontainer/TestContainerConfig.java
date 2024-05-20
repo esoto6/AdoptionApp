@@ -11,6 +11,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TestContainerConfig {
@@ -18,7 +19,7 @@ public class TestContainerConfig {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0")
-            .withDatabaseName("adoption")
+            .withDatabaseName("adoption_jdbc")
             .withUsername("postgres")
             .withPassword("pass")
             .withInitScript("postgres/schema.sql");
