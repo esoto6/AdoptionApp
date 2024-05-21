@@ -31,11 +31,11 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
                 Adopter adopter = Adopter.builder()
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
-                        .phoneNumber(rs.getString("phoneNumber"))
+                        .phoneNumber(rs.getString("phone_number"))
                         .email(rs.getString("email"))
                         .isOver18(rs.getBoolean("is18"))
-                        .dateCreated(rs.getDate("datecreated").toLocalDate())
-                        .dateModified(rs.getDate("datemodified") != null ? rs.getDate("datemodified").toLocalDate() : null)
+                        .dateCreated(rs.getDate("date_created").toLocalDate())
+                        .dateModified(rs.getDate("date_modified") != null ? rs.getDate("datemodified").toLocalDate() : null)
                         .build();
 
                 adopters.add(adopter);
@@ -63,11 +63,11 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
                     resAdopter = Adopter.builder()
                             .id(rs.getInt("id"))
                             .name(rs.getString("name"))
-                            .phoneNumber(rs.getString("phoneNumber"))
+                            .phoneNumber(rs.getString("phone_number"))
                             .email(rs.getString("email"))
                             .isOver18(rs.getBoolean("is18"))
-                            .dateCreated(rs.getDate("datecreated").toLocalDate())
-                            .dateModified(rs.getDate("datemodified") != null ? rs.getDate("datemodified").toLocalDate() : null)
+                            .dateCreated(rs.getDate("date_created").toLocalDate())
+                            .dateModified(rs.getDate("date_modified") != null ? rs.getDate("datemodified").toLocalDate() : null)
                             .build();
 
 
@@ -83,7 +83,7 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
 
     @Override
     public Adopter create(Adopter adopter) {
-        String sql = "INSERT INTO adopters (name, phoneNumber, email, is18, dateCreated) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO adopters (name, phone_number, email, is18, date_created) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, adopter.getName());
@@ -109,7 +109,7 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
     @Override
     public Adopter update(Adopter adopter) {
 
-        String sql = "UPDATE adopters SET name = ?, phoneNumber = ?, email = ?, is18 = ?, datemodified = ? WHERE id = ?";
+        String sql = "UPDATE adopters SET name = ?, phone_number = ?, email = ?, is18 = ?, date_modified = ? WHERE id = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, adopter.getName());
@@ -131,7 +131,7 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
     public int delete(int id) {
         int rowsAffected = 0;
 
-        String sql = "DELETE FROM Adopters WHERE id = ?";
+        String sql = "DELETE FROM adopters WHERE id = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)
 

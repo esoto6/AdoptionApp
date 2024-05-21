@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Profile("jpa")
+@Profile({"jpa", "tc_jpa"})
 public interface AdopterJPA extends JpaRepository<Adopter, Integer> {
 }

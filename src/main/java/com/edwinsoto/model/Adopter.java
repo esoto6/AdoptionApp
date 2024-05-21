@@ -1,6 +1,10 @@
 package com.edwinsoto.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +14,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "adopter")
+@Table(name = "adopters")
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,18 +22,28 @@ import java.time.LocalDate;
 public class Adopter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private int id;
-    @Column(name = "name")
+
+    @Column(name = "NAME")
     private String name;
-    @Column(name = "phoneNumber")
+
+    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
-    @Column(name = "email")
+
+    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "is18")
+
+    @Column(name = "IS18")
     private boolean isOver18;
-    @Column(name = "dateCreated")
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @Column(name = "DATE_CREATED")
     private LocalDate dateCreated;
-    @Column(name = "dateModified")
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @Column(name = "DATE_MODIFIED")
     private LocalDate dateModified;
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Profile("jpa")
+@Profile({"jpa", "tc_jpa"})
 @Repository
 public class AdopterJPADAOImpl implements DAO<Adopter> {
 
@@ -17,6 +17,7 @@ public class AdopterJPADAOImpl implements DAO<Adopter> {
 
     @Autowired
     public AdopterJPADAOImpl(AdopterJPA jpaDAO) {
+
         this.jpaDAO = jpaDAO;
     }
 

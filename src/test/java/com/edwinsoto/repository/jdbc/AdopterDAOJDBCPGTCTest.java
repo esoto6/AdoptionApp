@@ -1,7 +1,6 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import com.edwinsoto.model.Adopter;
-import com.edwinsoto.repository.jdbc.AdopterJDBCDAO;
 import com.edwinsoto.testcontainer.TestContainerConfig;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("tc")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AdopterJDBCDAOTest extends TestContainerConfig {
+class AdopterDAOJDBCPGTCTest extends TestContainerConfig {
 
 
     @Autowired

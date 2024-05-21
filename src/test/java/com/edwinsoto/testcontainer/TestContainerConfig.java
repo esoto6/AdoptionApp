@@ -19,7 +19,7 @@ public class TestContainerConfig {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0")
-            .withDatabaseName("adoption_jdbc")
+            .withDatabaseName("adoption")
             .withUsername("postgres")
             .withPassword("pass")
             .withInitScript("postgres/schema.sql");
