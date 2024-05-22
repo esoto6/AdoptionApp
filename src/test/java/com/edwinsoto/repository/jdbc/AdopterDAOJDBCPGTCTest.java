@@ -1,4 +1,4 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import com.edwinsoto.model.Adopter;
 import com.edwinsoto.testcontainer.TestContainerConfig;
@@ -17,21 +17,21 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
-@SpringBootTest(classes = AdopterPostgresDAO.class)
+@SpringBootTest(classes = AdopterJDBCDAO.class)
 @ActiveProfiles("tc")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AdopterPostgresDAOTest extends TestContainerConfig {
+class AdopterDAOJDBCPGTCTest extends TestContainerConfig {
 
 
     @Autowired
-    private AdopterPostgresDAO adopterPostgresDAO;
+    private AdopterJDBCDAO adopterJDBCDAO;
 
 
     @Test
     @Order(2)
     void findAll() {
-        List<Adopter> adopters = adopterPostgresDAO.findAll();
+        List<Adopter> adopters = adopterJDBCDAO.findAll();
         assertThat(adopters).hasSize(5);
     }
 
@@ -45,7 +45,7 @@ class AdopterPostgresDAOTest extends TestContainerConfig {
     })
     @Order(3)
     void findById(Integer adopterID, String adopterName) {
-        Optional<Adopter> adopter = adopterPostgresDAO.findById(adopterID);
+        Optional<Adopter> adopter = adopterJDBCDAO.findById(adopterID);
         assertThat(adopter).isPresent();
         assertThat(adopter.get().getName()).isEqualTo(adopterName);
     }
@@ -54,7 +54,7 @@ class AdopterPostgresDAOTest extends TestContainerConfig {
     @Order(4)
     @Disabled("Not working...")
     void findByInvalidID() {
-        Optional<Adopter> adopter = adopterPostgresDAO.findById(-1);
+        Optional<Adopter> adopter = adopterJDBCDAO.findById(-1);
         assertThat(adopter).isNotPresent();
     }
 
@@ -66,22 +66,22 @@ class AdopterPostgresDAOTest extends TestContainerConfig {
                 .phoneNumber("000-888-8889")
                 .build();
 
-        Adopter newAdopter = adopterPostgresDAO.create(adopter);
+        Adopter newAdopter = adopterJDBCDAO.create(adopter);
 
         assertThat(newAdopter).isNotNull();
         assertThat(newAdopter.getName()).isEqualTo(adopter.getName());
         assertThat(newAdopter.getPhoneNumber()).isEqualTo(adopter.getPhoneNumber());
-        assertThat(adopterPostgresDAO.findById(newAdopter.getId())).isPresent();
+        assertThat(adopterJDBCDAO.findById(newAdopter.getId())).isPresent();
     }
 
     @Test
     @Order(6)
     void update() {
-        Adopter adopterIdx1 = adopterPostgresDAO.findById(1).get();
+        Adopter adopterIdx1 = adopterJDBCDAO.findById(1).get();
         adopterIdx1.setName("Not Edwin");
-        adopterPostgresDAO.update(adopterIdx1);
+        adopterJDBCDAO.update(adopterIdx1);
 
-        Optional<Adopter> adopter = adopterPostgresDAO.findById(1);
+        Optional<Adopter> adopter = adopterJDBCDAO.findById(1);
         assertThat(adopter).isPresent();
         assertThat(adopter.get().getName()).isEqualTo(adopterIdx1.getName());
 
@@ -90,10 +90,10 @@ class AdopterPostgresDAOTest extends TestContainerConfig {
     @Test
     @Order(7)
     void delete() {
-        Adopter adopteridx1 = adopterPostgresDAO.findById(1).get();
+        Adopter adopteridx1 = adopterJDBCDAO.findById(1).get();
         assertThat(adopteridx1).isNotNull();
 
-        int rowsAffected = adopterPostgresDAO.delete(1);
+        int rowsAffected = adopterJDBCDAO.delete(1);
         assertThat(rowsAffected).isEqualTo(1);
     }
 }

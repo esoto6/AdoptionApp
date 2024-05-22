@@ -13,10 +13,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles(profiles = "dev")
+@ActiveProfiles(profiles = "inmem")
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class AnimalServiceTest {
+class AnimalServiceINMEMTest {
 
     @Autowired
     private AnimalService animalService;

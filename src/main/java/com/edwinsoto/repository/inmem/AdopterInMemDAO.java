@@ -1,6 +1,7 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.inmem;
 
 import com.edwinsoto.model.Adopter;
+import com.edwinsoto.repository.DAO;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("dev")
+@Profile("inmem")
 public class AdopterInMemDAO implements DAO<Adopter> {
 
     private final List<Adopter> adopters = new ArrayList<>();

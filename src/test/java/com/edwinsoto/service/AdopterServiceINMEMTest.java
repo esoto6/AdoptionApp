@@ -12,11 +12,13 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles(profiles = "dev")
+//@Testcontainers
+@ActiveProfiles(profiles = "inmem")
 //@SpringBootTest(classes = AdopterService.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class AdopterServiceTest {
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class AdopterServiceINMEMTest {
 
     @Autowired
     private AdopterService adopterService;

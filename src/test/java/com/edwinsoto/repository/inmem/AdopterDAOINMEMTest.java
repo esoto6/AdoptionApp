@@ -1,4 +1,4 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.inmem;
 
 import com.edwinsoto.model.Adopter;
 import org.junit.jupiter.api.Test;
@@ -14,9 +14,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = AdopterInMemDAO.class)
-@ActiveProfiles(profiles = "dev")
+@ActiveProfiles(profiles = "inmem")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class AdopterInMemDAOTest {
+class AdopterDAOINMEMTest {
 
     @Autowired
     private AdopterInMemDAO adopterInMemDAO;

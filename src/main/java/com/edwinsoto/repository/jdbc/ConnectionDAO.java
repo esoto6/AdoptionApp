@@ -1,4 +1,4 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class AbstractDAO {
+public class ConnectionDAO {
 
     @Autowired
     private Environment env;

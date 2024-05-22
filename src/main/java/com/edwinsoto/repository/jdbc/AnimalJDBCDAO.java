@@ -1,6 +1,7 @@
-package com.edwinsoto.repository;
+package com.edwinsoto.repository.jdbc;
 
 import com.edwinsoto.model.Animal;
+import com.edwinsoto.repository.DAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile({"tc", "prod"})
-public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
-    
+@Profile({"tc", "jdbc"})
+public class AnimalJDBCDAO extends ConnectionDAO implements DAO<Animal> {
+
     @Override
     public List<Animal> findAll() {
 
@@ -29,10 +30,10 @@ public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
                 Animal animal = Animal.builder()
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
-                        .type(rs.getString("type"))
+                        .type(rs.getString("pet_type"))
                         .dob(rs.getDate("dob").toLocalDate())
                         .breed(rs.getString("breed"))
-                        .adoptedDate(rs.getDate("adopteddate") != null ? rs.getDate("adopteddate").toLocalDate() : null)
+                        .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopted_date").toLocalDate() : null)
                         .build();
 
                 animals.add(animal);
@@ -60,10 +61,10 @@ public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
                     resAnimal = Animal.builder()
                             .id(rs.getInt("id"))
                             .name(rs.getString("name"))
-                            .type(rs.getString("type"))
+                            .type(rs.getString("pet_type"))
                             .dob(rs.getDate("dob").toLocalDate())
                             .breed(rs.getString("breed"))
-                            .adoptedDate(rs.getDate("adopteddate") != null ? rs.getDate("adopteddate").toLocalDate() : null)
+                            .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopted_date").toLocalDate() : null)
                             .build();
 
 
@@ -79,7 +80,7 @@ public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
 
     @Override
     public Animal create(Animal animal) {
-        String sql = "INSERT INTO Animals (name, type, dob, breed) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO animals (name, pet_type, dob, breed) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, animal.getName());
@@ -104,7 +105,7 @@ public class AnimalPostgresDAO extends AbstractDAO implements DAO<Animal> {
     @Override
     public Animal update(Animal animal) {
 
-        String sql = "UPDATE animals SET name = ?, type = ?, dob = ?, breed = ?, adopteddate = ? WHERE id = ?";
+        String sql = "UPDATE animals SET name = ?, pet_type = ?, dob = ?, breed = ?, adopted_date = ? WHERE id = ?";
 
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, animal.getName());

@@ -11,14 +11,14 @@ import java.util.Optional;
 @Service
 public class AdopterService {
 
-    private DAO<Adopter> adopterDAO;
+    private final DAO<Adopter> adopterDAO;
 
     @Autowired
     public AdopterService(DAO<Adopter> adopterDAO) {
         this.adopterDAO = adopterDAO;
     }
 
-    public List<Adopter> getAllAdopters(){
+    public List<Adopter> getAllAdopters() {
         return adopterDAO.findAll();
     }
 
@@ -37,7 +37,7 @@ public class AdopterService {
     public boolean updateAdopter(Adopter adopter) {
         Adopter updatedAdopter = adopterDAO.update(adopter);
         System.out.println(updatedAdopter.toString());
-        return updatedAdopter != null;
+        return true;
     }
 
     public int deleteAdopter(int id) {
