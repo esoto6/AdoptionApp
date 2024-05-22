@@ -2,13 +2,16 @@ package com.edwinsoto.repository.jpa;
 
 import com.edwinsoto.model.Adopter;
 import com.edwinsoto.testcontainer.TestContainerConfig;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -22,6 +25,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @ActiveProfiles({"tc", "jpa"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class AdopterDAOJPAPGTCTest extends TestContainerConfig {
 
     private final AdopterJPA jpaRepo;
@@ -58,7 +62,7 @@ class AdopterDAOJPAPGTCTest extends TestContainerConfig {
     @Order(4)
     void findByInvalidID() {
         Optional<Adopter> adopter = jpaRepo.findById(-1);
-        Assertions.assertThat(adopter).isNotPresent();
+        assertThat(adopter).isNotPresent();
     }
 
     @Test
@@ -71,10 +75,10 @@ class AdopterDAOJPAPGTCTest extends TestContainerConfig {
 
         Adopter newAdopter = jpaRepo.save(adopter);
 
-        Assertions.assertThat(newAdopter).isNotNull();
-        Assertions.assertThat(newAdopter.getName()).isEqualTo(adopter.getName());
-        Assertions.assertThat(newAdopter.getPhoneNumber()).isEqualTo(adopter.getPhoneNumber());
-        Assertions.assertThat(jpaRepo.findById(newAdopter.getId())).isPresent();
+        assertThat(newAdopter).isNotNull();
+        assertThat(newAdopter.getName()).isEqualTo(adopter.getName());
+        assertThat(newAdopter.getPhoneNumber()).isEqualTo(adopter.getPhoneNumber());
+        assertThat(jpaRepo.findById(newAdopter.getId())).isPresent();
     }
 
     @Test
@@ -85,8 +89,8 @@ class AdopterDAOJPAPGTCTest extends TestContainerConfig {
         jpaRepo.save(adopterIdx1);
 
         Optional<Adopter> adopter = jpaRepo.findById(1);
-        Assertions.assertThat(adopter).isPresent();
-        Assertions.assertThat(adopter.get().getName()).isEqualTo(adopterIdx1.getName());
+        assertThat(adopter).isPresent();
+        assertThat(adopter.get().getName()).isEqualTo(adopterIdx1.getName());
 
     }
 
@@ -94,7 +98,7 @@ class AdopterDAOJPAPGTCTest extends TestContainerConfig {
     @Order(7)
     void delete() {
         Adopter adopteridx1 = jpaRepo.findById(1).get();
-        Assertions.assertThat(adopteridx1).isNotNull();
+        assertThat(adopteridx1).isNotNull();
 
         jpaRepo.delete(adopteridx1);
 

@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -16,27 +17,28 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @DataJpaTest
 @ActiveProfiles({"tc", "jpa"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class AnimalDAOJPAPGTCTest extends TestContainerConfig {
 
-    private AnimalJPA animalJPA;
+    private final AnimalJPA jpaRepo;
 
     @Autowired
-    AnimalDAOJPAPGTCTest(AnimalJPA animalJPA) {
-        this.animalJPA = animalJPA;
+    AnimalDAOJPAPGTCTest(AnimalJPA jpaRepo) {
+        this.jpaRepo = jpaRepo;
     }
 
 
     @Test
     @Order(2)
     void findAll() {
-        List<Animal> animals = animalJPA.findAll();
+        List<Animal> animals = jpaRepo.findAll();
         assertThat(animals).hasSize(5);
     }
 
@@ -50,7 +52,7 @@ class AnimalDAOJPAPGTCTest extends TestContainerConfig {
     })
     @Order(3)
     void findById(Integer animalID, String animalName) {
-        Optional<Animal> animal = animalJPA.findById(animalID);
+        Optional<Animal> animal = jpaRepo.findById(animalID);
         assertThat(animal).isPresent();
         assertEquals(animalName, animal.get().getName());
     }
@@ -59,7 +61,7 @@ class AnimalDAOJPAPGTCTest extends TestContainerConfig {
     @Order(4)
     @Disabled("Not Working...")
     void findByInvalidID() {
-        Optional<Animal> animal = animalJPA.findById(-1);
+        Optional<Animal> animal = jpaRepo.findById(-1);
         assertThat(animal).isNotPresent();
     }
 
@@ -72,23 +74,23 @@ class AnimalDAOJPAPGTCTest extends TestContainerConfig {
                 .dob(LocalDate.of(2024, 5, 9))
                 .build();
 
-        Animal newAnimal = animalJPA.save(animal);
+        Animal newAnimal = jpaRepo.save(animal);
 
         assertThat(newAnimal).isNotNull();
         assertThat(newAnimal.getName()).isEqualTo("Skittles");
         assertThat(newAnimal.getType()).isEqualTo("CAT");
         assertThat(newAnimal.getDob()).isEqualTo(LocalDate.of(2024, 5, 9));
-        assertThat(animalJPA.findById(newAnimal.getId())).isPresent();
+        assertThat(jpaRepo.findById(newAnimal.getId())).isPresent();
     }
 
     @Test
     @Order(6)
     void update() {
-        Animal animalIndex1 = animalJPA.findById(1).get();
+        Animal animalIndex1 = jpaRepo.findById(1).get();
         animalIndex1.setName("New Name");
-        animalJPA.save(animalIndex1);
+        jpaRepo.save(animalIndex1);
 
-        Optional<Animal> animal = animalJPA.findById(animalIndex1.getId());
+        Optional<Animal> animal = jpaRepo.findById(animalIndex1.getId());
         assertThat(animal).isPresent();
         assertThat(animal.get().getName()).isEqualTo("New Name");
 
@@ -97,11 +99,11 @@ class AnimalDAOJPAPGTCTest extends TestContainerConfig {
     @Test
     @Order(7)
     void delete() {
-        Animal animalIndex1 = animalJPA.findById(1).get();
+        Animal animalIndex1 = jpaRepo.findById(1).get();
         assertThat(animalIndex1).isNotNull();
 
-        animalJPA.delete(animalIndex1);
-        assertThat(animalJPA.findById(1)).isEmpty();
+        jpaRepo.delete(animalIndex1);
+        assertThat(jpaRepo.findById(1)).isEmpty();
 
 //        Optional<Animal> invalidIDxAnimal = animalPostgresDAO.findById(1);
 //        assertThat(invalidIDxAnimal.orElse(null)).isNull();

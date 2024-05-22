@@ -1,5 +1,6 @@
 package com.edwinsoto.testcontainer;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -32,6 +33,7 @@ public class TestContainerConfig {
     }
 
     @Test
+    @Order(1)
     void connectionEstablished() {
         assertThat(postgres.isCreated()).isTrue();
         assertThat(postgres.isRunning()).isTrue();
