@@ -35,7 +35,7 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
                         .email(rs.getString("email"))
                         .isOver18(rs.getBoolean("is18"))
                         .dateCreated(rs.getDate("date_created").toLocalDate())
-                        .dateModified(rs.getDate("date_modified") != null ? rs.getDate("datemodified").toLocalDate() : null)
+                        .dateModified(rs.getDate("date_modified") != null ? rs.getDate("date_modified").toLocalDate() : null)
                         .build();
 
                 adopters.add(adopter);
@@ -67,7 +67,7 @@ public class AdopterJDBCDAO extends ConnectionDAO implements DAO<Adopter> {
                             .email(rs.getString("email"))
                             .isOver18(rs.getBoolean("is18"))
                             .dateCreated(rs.getDate("date_created").toLocalDate())
-                            .dateModified(rs.getDate("date_modified") != null ? rs.getDate("datemodified").toLocalDate() : null)
+                            .dateModified(rs.getDate("date_modified") != null ? rs.getDate("date_modified").toLocalDate() : null)
                             .build();
 
 

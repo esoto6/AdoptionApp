@@ -33,7 +33,7 @@ public class AnimalJDBCDAO extends ConnectionDAO implements DAO<Animal> {
                         .type(rs.getString("pet_type"))
                         .dob(rs.getDate("dob").toLocalDate())
                         .breed(rs.getString("breed"))
-                        .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopteddate").toLocalDate() : null)
+                        .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopted_date").toLocalDate() : null)
                         .build();
 
                 animals.add(animal);
@@ -64,7 +64,7 @@ public class AnimalJDBCDAO extends ConnectionDAO implements DAO<Animal> {
                             .type(rs.getString("pet_type"))
                             .dob(rs.getDate("dob").toLocalDate())
                             .breed(rs.getString("breed"))
-                            .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopteddate").toLocalDate() : null)
+                            .adoptedDate(rs.getDate("adopted_date") != null ? rs.getDate("adopted_date").toLocalDate() : null)
                             .build();
 
 
